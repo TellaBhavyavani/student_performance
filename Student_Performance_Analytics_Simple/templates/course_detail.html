@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Course Details</h2>
+    <p><b>ID:</b> {{ course.id }}</p>
+    <p><b>Name:</b> {{ course.name }}</p>
+    <p><b>Code:</b> {{ course.code }}</p>
+
+    <a href="{{ url_for('courses') }}">Back</a>
+</div>
+{% endblock %}

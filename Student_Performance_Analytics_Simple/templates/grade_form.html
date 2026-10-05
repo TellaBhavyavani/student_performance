@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>{% if grade %}Edit Grade{% else %}Add Grade{% endif %}</h2>
+
+    <form method="POST"
+          action="{% if grade %}{{ url_for('update_grade', id=grade.id) }}{% else %}{{ url_for('create_grade') }}{% endif %}">
+
+        <label>Student:</label><br>
+        <select name="student_id" required>
+            {% for student in students %}
+                <option value="{{ student.id }}"
+                    {% if grade and grade.student_id == student.id %}selected{% endif %}>
+                    {{ student.name }}
+                </option>
+            {% endfor %}
+        </select><br>
+
+        <label>Course:</label><br>
+        <select name="course_id" required>
+            {% for course in courses %}
+                <option value="{{ course.id }}"
+                    {% if grade and grade.course_id == course.id %}selected{% endif %}>
+                    {{ course.name }}
+                </option>
+            {% endfor %}
+        </select><br>
+
+        <label>Score:</label><br>
+        <input type="number" name="score" min="0" max="100" step="0.01"
+               value="{{ grade.score if grade else '' }}" required><br>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

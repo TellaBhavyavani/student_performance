@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>Student Performance Analytics System</h1>
+    <p>Manage students, courses, grades and analytics.</p>
+
+    {% if not session.get("user_id") %}
+        <a class="btn" href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+</div>
+{% endblock %}

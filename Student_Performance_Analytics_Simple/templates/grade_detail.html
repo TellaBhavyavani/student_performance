@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Grade Details</h2>
+
+    <p><b>Student:</b> {{ grade.student.name }}</p>
+    <p><b>Course:</b> {{ grade.course.name }}</p>
+    <p><b>Score:</b> {{ grade.score }}</p>
+    <p><b>Date:</b> {{ grade.date }}</p>
+
+    <a href="{{ url_for('grades') }}">Back</a>
+</div>
+{% endblock %}

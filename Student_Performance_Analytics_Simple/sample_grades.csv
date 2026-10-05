@@ -1,0 +1,7 @@
+student_email,course_code,score
+alice@example.com,PY101,90
+alice@example.com,DB101,85
+bob@example.com,PY101,78
+bob@example.com,WEB101,88
+charlie@example.com,DB101,72
+charlie@example.com,WEB101,80

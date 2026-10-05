@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+Flask-JWT-Extended
+PyMySQL
+pandas
+numpy
+openpyxl
+python-dotenv

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>Dashboard</h1>
+    <p>Welcome to the Student Performance Analytics System.</p>
+
+    <a class="btn" href="{{ url_for('students') }}">Students</a>
+    <a class="btn" href="{{ url_for('courses') }}">Courses</a>
+    <a class="btn" href="{{ url_for('grades') }}">Grades</a>
+    <a class="btn" href="{{ url_for('analytics_page') }}">Analytics</a>
+</div>
+{% endblock %}

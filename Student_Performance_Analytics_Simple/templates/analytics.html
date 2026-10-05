@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Analytics Dashboard</h2>
+
+<div class="card">
+    <form method="GET">
+        <label>Course:</label>
+        <select name="course">
+            <option value="">All Courses</option>
+            {% for course in courses %}
+                <option value="{{ course.code }}">{{ course.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Student:</label>
+        <select name="student">
+            <option value="">All Students</option>
+            {% for student in students %}
+                <option value="{{ student.email }}">{{ student.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Statistics</h3>
+    <p>Mean: {{ result.average }}</p>
+    <p>Median: {{ result.median }}</p>
+    <p>Standard Deviation: {{ result.std }}</p>
+</div>
+
+<div class="card">
+    <h3>Average Grade by Course</h3>
+
+    <table>
+        <tr>
+            <th>Course</th>
+            <th>Code</th>
+            <th>Average</th>
+        </tr>
+
+        {% for row in result.course_average.itertuples() %}
+        <tr>
+            <td>{{ row.course }}</td>
+            <td>{{ row.course_code }}</td>
+            <td>{{ "%.2f"|format(row.average_score) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card">
+    <h3>Ranking</h3>
+
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Score</th>
+            <th>Rank</th>
+        </tr>
+
+        {% for row in result.ranking.itertuples() %}
+        <tr>
+            <td>{{ row.student }}</td>
+            <td>{{ row.course }}</td>
+            <td>{{ row.score }}</td>
+            <td>{{ row.rank }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card">
+    <a class="btn" href="{{ url_for('export_csv') }}">Download CSV</a>
+    <a class="btn" href="{{ url_for('export_xlsx') }}">Download Excel</a>
+
+    {% if session.get("role") == "admin" %}
+    <h3>Upload Grades CSV</h3>
+
+    <form method="POST"
+          action="{{ url_for('upload_csv') }}"
+          enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Upload</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

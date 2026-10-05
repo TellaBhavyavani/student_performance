@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>{% if course %}Edit Course{% else %}Add Course{% endif %}</h2>
+
+    <form method="POST"
+          action="{% if course %}{{ url_for('update_course', id=course.id) }}{% else %}{{ url_for('create_course') }}{% endif %}">
+
+        {% if course %}
+            <input type="hidden" name="_method" value="PUT">
+        {% endif %}
+
+        <div class="form-group">
+            <label>Name:</label><br>
+            <input type="text" name="name"
+                   value="{{ course.name if course else '' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Code:</label><br>
+            <input type="text" name="code"
+                   value="{{ course.code if course else '' }}" required>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}
